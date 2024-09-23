@@ -26,11 +26,11 @@ class Schedule():
             
             tutors = self.__getTutors(sheet)
 
-            tutors = self.__getTimes(sheet, tutors)
+            self.__fillTimes(sheet, tutors)
 
             tutors = self.__getCleanTutors(tutors)
 
-            tutors = self.__getShifts(tutors)
+            self.__createShifts(tutors)
 
             self.data[sheet.title] = tutors
 
@@ -51,7 +51,7 @@ class Schedule():
                         }
         return tutors
 
-    def __getTimes(self, sheet, tutors) -> dict:
+    def __fillTimes(self, sheet, tutors) -> dict:
         for row in sheet.iter_rows(min_row=1, values_only=True):
             if row[1] in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]:
                 day = row[1]
@@ -78,7 +78,7 @@ class Schedule():
 
         return cleanTutors
             
-    def __getShifts(self, tutors) -> dict:
+    def __createShifts(self, tutors) -> dict:
         for tutor, days in tutors.items():
             for day, times in days.items():  
                 intervals = []
