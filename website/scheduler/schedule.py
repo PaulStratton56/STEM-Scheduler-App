@@ -1,5 +1,6 @@
 from openpyxl import load_workbook
 from datetime import datetime, timedelta, date
+import json
 
 SCHEDULE_CELLS = 21
 
@@ -10,11 +11,6 @@ EMPTY_SCHEDULE = {
     'Thursday' : [], 
     'Friday' : []
                 }
-
-class Tutor:
-    def __init__(self, name, hours):
-        self.name = name
-        self.hours = hours
 
 class Schedule():
 
@@ -114,7 +110,26 @@ class Schedule():
                     print()
                 print()
 
+    def getJSON(self) -> str:
+        dataDict = {}
+        for subject, tutors in self.data.items():
+            tutorDict = {}
+            for tutor, days in tutors.items():
+                dayDict = {}
+                for day, times in days.items():
+                    shiftDict = {}
+                    for shiftIndex, shift in enumerate(times):
+                        shiftStr = shift[0].strftime('%I:%M %p') + '-' + shift[1].strftime('%I:%M %p')
+                        shiftDict[shiftIndex] = shiftStr
+                    dayDict[day] = shiftDict
+                tutorDict[tutor] = dayDict
+            dataDict[subject] = tutorDict
+        return json.dumps(dataDict)
+
 if __name__ == '__main__':
     schedule = Schedule("STEMTutoringFA24Schedule.xlsx")
 
-    schedule.printSchedule()
+    print(schedule.getJSON())
+    # schedule.printSchedule()
+    # print(schedule.data)
+    # print(json.dumps(schedule.data))
