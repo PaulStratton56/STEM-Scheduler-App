@@ -7,9 +7,9 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/getSchedule/<scheduleName>')
+@app.route('/getSchedule/<scheduleName>', methods=['GET'])
 def getSchedule(scheduleName):
-    schedule = Schedule(scheduleName)
+    schedule = Schedule('scheduler/' + scheduleName)
     return schedule.getJSON()
 
 @app.route('/debug')

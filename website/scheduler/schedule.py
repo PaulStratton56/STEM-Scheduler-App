@@ -113,6 +113,7 @@ class Schedule():
     def getJSON(self) -> str:
         dataDict = {}
         for subject, tutors in self.data.items():
+            jsonSubject = subject.split('(')[1][:-1]
             tutorDict = {}
             for tutor, days in tutors.items():
                 dayDict = {}
@@ -123,7 +124,7 @@ class Schedule():
                         shiftDict[shiftIndex] = shiftStr
                     dayDict[day] = shiftDict
                 tutorDict[tutor] = dayDict
-            dataDict[subject] = tutorDict
+            dataDict[jsonSubject] = tutorDict
         return json.dumps(dataDict)
 
 if __name__ == '__main__':

@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tutoring Hours</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css')}}">
 </head>
-<body>
-    <h2>About Us</h2>
-    <p>This is a sample homepage created using Flask.</p>
-    <button id="myButton">Click Me!</button>
-    <p id="responseMessage"></p>
+<body onload="getScheduleData()">
+    <div id="header">
+        STEM Tutoring Hub Hours
+    </div>
+    <!-- <button id="myButton">click me!</button> -->
+    <div id="subjectTabs"></div>
+    <div id="main">
+        <div id="subjectBlock"></div>
+        <div id="tutorBlock">
+            <div id="tutor4" class="tutor">
+                <p class="tutorName">Porfi</p>
+                    <p class="day">Tue</p>
+                        <p class="shift">"01:00 PM-02:30 PM"</p>
+                    <p class="day">Wed</p>
+                        <p class="shift">"02:30 PM-04:00 PM"</p>
+                    <p class="day">Thu</p>
+                        <p class="shift">"02:00 PM-02:30 PM"</p>
+            </div>
+        </div>
+    </div>
 
     <script src="{{ url_for('static', filename='index.js')}}"></script>
 </body>
