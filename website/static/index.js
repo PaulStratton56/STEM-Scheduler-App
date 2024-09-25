@@ -1,8 +1,10 @@
 var scheduleData;
 
+const SHEET_NAME = "STEMTutoringFA24Schedule"
+
 function getScheduleData(){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/getSchedule/" + "STEMTutoringFA24Schedule.xlsx", true);
+    xhr.open("GET", "/getSchedule/" + SHEET_NAME + ".xlsx", true);
     
     xhr.send();
     

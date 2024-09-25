@@ -9,7 +9,7 @@ def index():
 
 @app.route('/getSchedule/<scheduleName>', methods=['GET'])
 def getSchedule(scheduleName):
-    schedule = Schedule('scheduler/' + scheduleName)
+    schedule = Schedule('scheduler/schedules/' + scheduleName)
     return schedule.getJSON()
 
 @app.route('/debug')
