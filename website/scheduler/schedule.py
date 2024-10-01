@@ -88,7 +88,9 @@ class Schedule():
                         intervals.append([times[startInterval],times[endInterval-1]])
                         startInterval = endInterval
                     endInterval += 1
-                intervals.append([times[startInterval],times[endInterval-1]])
+                endTime = datetime.combine(date=date.fromisoformat('2003-10-11'), time=times[endInterval-1])
+                endTime += timedelta(minutes=30)
+                intervals.append([times[startInterval],endTime])
 
                 tutors[tutor][day] = intervals
         
@@ -104,9 +106,7 @@ class Schedule():
 
                     for interval in hours:
                         if (len(interval) == 2):
-                            newTime = datetime.combine(date=date.fromisoformat('2019-12-04'), time=interval[1])
-                            newTime += timedelta(minutes=30)
-                            print(f"{interval[0].strftime('%I:%M %p')} - {newTime.strftime('%I:%M %p')} | ", end="")
+                            print(f"{interval[0].strftime('%I:%M %p')} - {interval[1].strftime('%I:%M %p')} | ", end="")
                     print()
                 print()
 
@@ -128,9 +128,9 @@ class Schedule():
         return json.dumps(dataDict)
 
 if __name__ == '__main__':
-    schedule = Schedule("STEMTutoringFA24Schedule.xlsx")
+    schedule = Schedule("schedules/STEMTutoringFA24Schedule.xlsx")
 
-    print(schedule.getJSON())
-    # schedule.printSchedule()
+    # print(schedule.getJSON())
+    schedule.printSchedule()
     # print(schedule.data)
     # print(json.dumps(schedule.data))

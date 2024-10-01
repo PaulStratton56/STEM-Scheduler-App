@@ -121,7 +121,7 @@ body{
     padding: 1rem;
     
     *{
-        user-select: none;
+        /* user-select: none; */
     }
 
     .tutorName{
